@@ -1,3 +1,4 @@
+import os
 from os.path import join
 from pathlib import Path
 
@@ -8,8 +9,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,7 +16,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps'
+    'apps',
+    'events'
+
 ]
 
 MIDDLEWARE = [
@@ -31,12 +32,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'root.urls'
-AUTH_USER_MODEL='apps.User'
+AUTH_USER_MODEL = 'apps.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -51,16 +52,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'root.wsgi.application'
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -77,7 +74,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -86,12 +82,14 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+STATICFILES_DIRS = [
+    join(BASE_DIR, 'static1'),
+]
 
 STATIC_URL = 'static/'
-STATIC_ROOT = join(BASE_DIR,'static')
+STATIC_ROOT = join(BASE_DIR, 'static')
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = join(BASE_DIR,'media')
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
